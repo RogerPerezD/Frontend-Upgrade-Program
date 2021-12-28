@@ -143,3 +143,28 @@ container.insertBefore(newDiv, h1);
 
 
 console.log(newDiv);
+
+// ----------------------------Events----------------------------
+
+// Click event
+const button = document.querySelector('#button');
+
+const handleClick = ( e ) =>{
+    document.querySelector('#header-title').textContent = 'Changed';
+    document.querySelector('#main').style.background = '#f4f4f4';
+
+    // Get el elemento que fue clickeado
+    console.log(e.target);
+    console.log(e.target.textContent);
+
+    // Get the type of the event for example in this case 'click'
+    console.log(e.type);
+
+    // saber si alguna de las sigueintes teclas estan presionadas
+    // al momento que ocurre el evento
+    console.log(e.altKey);
+    console.log(e.ctrlKey);
+    console.log(e.shiftKey);
+}
+
+button.addEventListener('click', handleClick);
