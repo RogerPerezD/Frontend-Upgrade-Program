@@ -31,4 +31,16 @@ const addItem = (e) => {
     itemList.appendChild(liTag);
 }
 
+const deleteItem = (e) => {
+
+    if (e.target.classList.contains('delete')) {
+        if (confirm('Are you sure?')) {
+            const liSelected = e.target.parentNode;
+            itemList.removeChild(liSelected);
+        }
+    }
+}
+
 form.addEventListener('submit', addItem);
+
+itemList.addEventListener('click', deleteItem);
