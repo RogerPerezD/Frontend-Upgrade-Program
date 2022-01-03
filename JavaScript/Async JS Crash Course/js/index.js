@@ -1,7 +1,7 @@
 import { buscarHeroe } from './callbacks.js';
 
 
-const heroeID = 'capi2';
+const heroeID = 'capi';
 buscarHeroe( heroeID, (err, heroe) =>{
 
     if (err) {
