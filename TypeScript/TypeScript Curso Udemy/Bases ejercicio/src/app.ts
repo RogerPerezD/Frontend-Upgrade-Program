@@ -20,13 +20,13 @@
     const fuerzaAcuaman = 0;
 
     enum FuerzaHeroes {
-      fuerzaAcuaman,
-      fuerzaBatman,
-      fuerzaFlash = 5,
-      fuerzaSuperman = 100
+      acuaman,
+      batman,
+      flash = 5,
+      superman = 100
     }
 
-    console.log(FuerzaHeroes.fuerzaAcuaman, FuerzaHeroes.fuerzaSuperman);
+    console.log(FuerzaHeroes.acuaman, FuerzaHeroes.superman);
   
     // Retorno de funciones
     function activar_batiseñal() :string{
