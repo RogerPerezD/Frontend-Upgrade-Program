@@ -1,5 +1,5 @@
 import { pieChart } from './pieChart.js';
-// import { drawStuff } from './barChart.js';
+import { barChart } from './barChart.js';
 import { fetchApi } from './fetchApi';
 
 const template = document.createElement('template');
@@ -11,20 +11,22 @@ template.innerHTML = `
 class Chart extends HTMLElement{ 
     constructor(){
         super();
-        this.attachShadow( { mode: 'open' });
+        this.attachShadow( { mode: 'open' } );
         this.shadowRoot.appendChild( template.content.cloneNode(true) );
         this.type = this.getAttribute('type');
         this.url = this.getAttribute('data-source');
         this.field = this.getAttribute('field');
-        this.options = this.getAttribute('options').split(' ');
         this.cardChart = this.shadowRoot.querySelector('.card-chart')
     }
 
     async getData (){
         const data = await fetchApi( this.url );
         let optionsObj = {};
-        this.options.forEach( option =>{
-            optionsObj[option] = 0;
+
+        if (this.getAttribute('options')) {
+            const options = this.getAttribute('options').split(' ');
+            options.forEach( option =>{
+                optionsObj[option] = 0;
             });
 
             data.forEach(element => {
@@ -32,14 +34,17 @@ class Chart extends HTMLElement{
                     optionsObj[element[this.field]] = optionsObj[element[this.field]]+1;
                 }
             });
-
+        }else{
+            data.forEach(element => {
+                    optionsObj[element[this.field]] = optionsObj[element[this.field]]+1 || 1;
+            });
+        }
         let arr = [];
         Object.keys(optionsObj).forEach( key =>{
             const value = [key, optionsObj[key]];
             arr.push(value);
         });
-
-        return arr;
+        return arr; 
     }
 
     async drawPie(){
@@ -52,9 +57,19 @@ class Chart extends HTMLElement{
         });
     }
 
+    async drawBar(){
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback( async () =>{
+            const dataFromApi = await this.getData();
+            const {data, options} = barChart(dataFromApi, this.field);
+            const chart = new google.charts.Bar(this.cardChart);
+            chart.draw(data, options);
+        });
+    }
+
     connectedCallback(){
-        console.log('Hola2');
-        this.drawPie();
+        this.type === 'bar' && this.drawBar();
+        this.type === 'pie' && this.drawPie(); 
     }
 }
 

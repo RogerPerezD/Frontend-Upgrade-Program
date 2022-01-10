@@ -5,12 +5,6 @@ export const pieChart = ( values ) => {
   data.addColumn('string', 'Status');
   data.addColumn('number', 'NumberTodos');
   data.addRows(values);
-  // console.log(values)
-  // console.log([
-  //   ['Completed', 2],
-  // ['Incompleted', 3]
-  // ])
-
   // Set chart options
   const options = {'title':'Todos Status',
   is3D: true};

@@ -1,29 +1,14 @@
-import { fetchTodos } from './fetchApi.js'
 
-export const drawStuff = async ( url ) => {
-  const todos = await fetchTodos( url );
-  let completed = 0;
-  let incompleted = 0;
-  todos.forEach(todo => {
-      if (todo.completed) {
-          completed++;
-      } else {
-          incompleted++;
-      }
-  });
+export const barChart = ( dataFromApi, field ) => {
 
-  const data = new google.visualization.arrayToDataTable([
-    ['Status', 'Todos'],
-    ["Completed", completed],
-    ["Incompleted", incompleted]
-  ]);
-
+  dataFromApi.unshift([field.toLocaleUpperCase(), 'TOTAL']);
+  const data = new google.visualization.arrayToDataTable(dataFromApi);
   const options = {
     title: 'Chess opening moves',
     width: 900,
     legend: { position: 'none' },
-    chart: { title: 'Todos',
-              subtitle: 'Current Status' },
+    chart: { title: field.toLocaleUpperCase(),
+              subtitle: `${ field } by percentage` },
     bars: 'horizontal', // Required for Material Bar Charts.
     axes: {
       x: {
@@ -33,7 +18,4 @@ export const drawStuff = async ( url ) => {
     bar: { groupWidth: "90%" }
   };
   return {data,options};
-
-  // const chart = new google.charts.Bar(document.getElementById('top_x_div'));
-  // chart.draw(data, options);
 };
