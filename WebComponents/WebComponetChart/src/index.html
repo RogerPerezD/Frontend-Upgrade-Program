@@ -7,33 +7,22 @@
     <title>Webpack</title>
 </head>
 <body>
-   <my-chart type="bar" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
-    options="human half-giant werewolf"></my-chart>
-
-    <my-chart type="bar" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
-    ></my-chart>
-
-    <my-chart type="pie" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
-    options="human half-giant werewolf"></my-chart>
-
-    <my-chart type="pie" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
-    ></my-chart>
- <!-- 
-    <my-chart type="pie" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
-    options="human half-giant werewolf"></my-chart>
-
-    <my-chart type="bar" data-source="http://hp-api.herokuapp.com/api/characters" field="gender"
-    options="male female"></my-chart>
-
-    <my-chart type="pie" data-source="http://hp-api.herokuapp.com/api/characters" field="gender"
-    options="male female"></my-chart> -->
-
-    <!-- <my-chart type="pie" data-source="https://swapi.dev/api/people" field="height"
-    options="172 167 96"></my-chart>
--->
-    <my-chart type="bar" data-source="https://swapi.dev/api/people" field="height"
-    options="172 167 96"></my-chart> 
-    <my-chart type="bar" data-source="https://swapi.dev/api/people" field="height"></my-chart> 
+    <h1>Api Chart.js</h1>
+    <main>
+        <form action="" id="formChart">
+            <label for="endpoint">Enter the endpoint</label>
+            <input type="text" name="endpoint" id="endpoint">
+            <label for="field">Enter the field</label>
+            <input type="text" name="field" id="field">
+            <label for="typeChart">Enter the type of chart</label>
+            <input type="text" name="typeChart" id="typeChart">
+            <label for="options">Enter the options</label>
+            <input type="text" name="options" id="options">
+            <button type="submit">Send</button>
+        </form>
+        <!-- <my-chart type="bar" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
+    ></my-chart> -->
+    </main>
     
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>

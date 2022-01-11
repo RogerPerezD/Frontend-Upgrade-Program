@@ -1,29 +1,29 @@
 import { pieChart } from './pieChart.js';
 import { barChart } from './barChart.js';
-import { fetchApi } from './fetchApi';
-
-const template = document.createElement('template');
-template.innerHTML = `
-<div class="card-chart" style="width: 900px; height: 500px;">
-</div>
-`;
+import { fetchApi } from './fetchApi.js';
 
 class Chart extends HTMLElement{ 
+    template = document.createElement('template');
     constructor(){
         super();
         this.attachShadow( { mode: 'open' } );
-        this.shadowRoot.appendChild( template.content.cloneNode(true) );
+        this.template.innerHTML = `
+        <div class="card-chart" style="width: 900px; height: 500px;">
+        </div>`;
+        this.shadowRoot.appendChild( this.template.content.cloneNode(true) );
         this.type = this.getAttribute('type');
         this.url = this.getAttribute('data-source');
         this.field = this.getAttribute('field');
         this.cardChart = this.shadowRoot.querySelector('.card-chart')
+        console.log(this.getAttributeNames())
     }
 
     async getData (){
         const data = await fetchApi( this.url );
         let optionsObj = {};
+        let dataFilter = [];
 
-        if (this.getAttribute('options')) {
+        if (this.hasAttribute('options')) {
             const options = this.getAttribute('options').split(' ');
             options.forEach( option =>{
                 optionsObj[option] = 0;
@@ -38,13 +38,15 @@ class Chart extends HTMLElement{
             data.forEach(element => {
                     optionsObj[element[this.field]] = optionsObj[element[this.field]]+1 || 1;
             });
+            console.log(this.field)
         }
-        let arr = [];
+
         Object.keys(optionsObj).forEach( key =>{
             const value = [key, optionsObj[key]];
-            arr.push(value);
+            dataFilter.push(value);
         });
-        return arr; 
+        
+        return dataFilter; 
     }
 
     async drawPie(){
@@ -67,9 +69,13 @@ class Chart extends HTMLElement{
         });
     }
 
+    render(){
+        this.type == 'bar' && this.drawBar();
+        this.type == 'pie' && this.drawPie();
+    }
+
     connectedCallback(){
-        this.type === 'bar' && this.drawBar();
-        this.type === 'pie' && this.drawPie(); 
+       this.render();
     }
 }
 
