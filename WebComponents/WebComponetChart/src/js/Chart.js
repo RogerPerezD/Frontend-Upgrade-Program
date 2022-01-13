@@ -14,8 +14,7 @@ class Chart extends HTMLElement{
         this.type = this.getAttribute('type');
         this.url = this.getAttribute('data-source');
         this.field = this.getAttribute('field');
-        this.cardChart = this.shadowRoot.querySelector('.card-chart')
-        console.log(this.getAttributeNames())
+        this.cardChart = this.shadowRoot.querySelector('.card-chart');
     }
 
     async getData (){

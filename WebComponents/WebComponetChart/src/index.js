@@ -1,4 +1,6 @@
 import { Chart } from './js/Chart';
+import './css/main.css';
+import './scss/main.scss';
 
 const formChart = document.querySelector('#formChart');
 const inputEndPoint = document.querySelector('#endpoint');

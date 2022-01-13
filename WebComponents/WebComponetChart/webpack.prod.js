@@ -27,6 +27,10 @@ module.exports = {
                 use: ["style-loader", "css-loader"],
             },
             {
+                test: /\.scss$/i,
+                use: ["style-loader", "css-loader","sass-loader"],
+            },
+            {
                 test: /styles\.css$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
             },
@@ -44,7 +48,10 @@ module.exports = {
                 use: {
                   loader: "babel-loader",
                   options: {
-                    presets: ['@babel/preset-env']
+                    presets: ['@babel/preset-env'],
+                    plugins: [
+                        ["@babel/transform-runtime"]
+                    ]
                   }
                 }
               },
