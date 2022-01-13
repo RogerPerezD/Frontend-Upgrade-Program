@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
+    entry: './src/index.ts',
     output:{
 		clean:true
 	},
@@ -38,6 +39,11 @@ module.exports = {
 				}
 				],
 			},
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
         ]
     },
     optimization: {
@@ -57,5 +63,12 @@ module.exports = {
 		    { from: 'src/assets', to: 'assets/' },
 			],
 		}),
-    ]
+    ],
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
+    output: {
+        filename: 'bundle.js',
+        // path: path.resolve(__dirname, 'dist'),
+    }
 }
