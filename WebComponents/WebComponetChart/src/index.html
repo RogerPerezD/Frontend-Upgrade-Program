@@ -7,23 +7,48 @@
     <title>Webpack</title>
 </head>
 <body>
-    <h1>Api Chart.js</h1>
-    <main class="formApi">
+    <div class="form">
+        <h2 class="form__title">Api Web Component</h2>
         <form id="formChart">
-            <label for="endpoint">Enter the endpoint</label>
-            <input type="text" name="endpoint" id="endpoint">
-            <label for="field">Enter the field</label>
-            <input type="text" name="field" id="field">
-            <label for="typeChart">Enter the type of chart</label>
-            <input type="text" name="typeChart" id="typeChart">
-            <label for="options">Enter the options</label>
-            <input type="text" name="options" id="options">
-            <button type="submit">Send</button>
+            <div class="form__container">
+                <div class="form__group">
+                    <input type="text" class="form__input" id="endpoint" placeholder=" ">
+                    <label for="endpoint" class="form__label">Endpoint:</label>
+                    <span class="form__line"></span>
+                    <button type="button" class="form__submit" id="getFields">Get Fields</button>
+                </div>
+                <div class="form__group">
+                    <!-- <input type="text" class="form__input" id="field" placeholder=" "> -->
+                    <select  class="form__input" id="field">
+                    </select>
+                    <label for="field" class="form__label">Field:</label>
+                    <span class="form__line"></span>
+                </div>
+                <div class="form__group">
+                    <!-- <input type="text" class="form__input" id="typeChart" placeholder=" ">
+                    -->
+                    <select  class="form__input" id="typeChart">
+                        <option value="bar">Bar</option>
+                        <option value="pie">Pie</option>
+                    </select>
+                    <label for="typeChart" class="form__label">Type Chart:</label> 
+                    <span class="form__line"></span>
+                </div>
+                <div class="form__group">
+                    <input type="text" class="form__input" id="options" placeholder=" ">
+                    <label for="options" class="form__label">Options:</label>
+                    <span class="form__line"></span>
+                </div>
+
+                <button type="submit" class="form__submit">Send</button>
+            </div>
         </form>
-        <!-- <my-chart type="bar" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
+    </div>
+       
+
+         <!-- <my-chart type="bar" data-source="http://hp-api.herokuapp.com/api/characters" field="species"
     ></my-chart> -->
-    </main>
-    
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 </html>
