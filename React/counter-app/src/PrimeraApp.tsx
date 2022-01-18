@@ -3,20 +3,20 @@ import PropTypes from 'prop-types'
 
 
 interface Props{
-    name?: string
+    saludo?: string
 }
 
-const PrimeraApp: React.FC<Props> = ( { name }) =>{
-    return <h1>Hola Mundo { name }</h1>
+const PrimeraApp: React.FC<Props> = ( { saludo }) =>{
+    return <h1>{ saludo }</h1>
 }
 
 
 PrimeraApp.propTypes = {
-    name: PropTypes.string
+    saludo: PropTypes.string
 }
 
 PrimeraApp.defaultProps = {
-    name: 'Roger'
+    saludo: 'Hola soy Goku'
   };
 
 export default PrimeraApp;
