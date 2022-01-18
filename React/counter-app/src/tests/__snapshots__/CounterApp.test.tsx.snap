@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas CounterApp should show the component CounteApp Succesfully 1`] = `
+<Fragment>
+  <h1>
+    CounterApp
+  </h1>
+  <h2>
+    0
+  </h2>
+  <button
+    className="add"
+    onClick={[Function]}
+  >
+     +1 
+  </button>
+  <button
+    className="reset"
+    onClick={[Function]}
+  >
+     Reset 
+  </button>
+  <button
+    className="substract"
+    onClick={[Function]}
+  >
+      -1 
+  </button>
+</Fragment>
+`;
