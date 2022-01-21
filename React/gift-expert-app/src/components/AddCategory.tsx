@@ -13,6 +13,7 @@ const AddCategory: React.FC<Props> = ({ setCategories }) => {
 
     const handleSubmit = async( event: React.FormEvent) =>{
         event.preventDefault();
+        console.log('Sumit launch', inputValue);
         if (inputValue.trim().length > 2) {
             setCategories( (categories: string[]) => { 
                 return [inputValue,...categories];
