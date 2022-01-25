@@ -14,7 +14,7 @@ return (
         <hr />
 
         <button className='btn'
-        onClick={ () =>{ increment(5) }}> +1 </button>
+        onClick={ () =>{ increment() }}> +1 </button>
         <button className='btn'
         onClick={ reset }> Reset </button>
         <button className='btn'

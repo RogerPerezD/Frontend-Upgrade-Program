@@ -6,8 +6,8 @@ const useCounter = ( initialState: number = 0) => {
   
     const [state, setState] = useState(initialState);
 
-    const increment = ( factor: number = 1) =>{
-        setState( state + factor);
+    const increment = () =>{
+        setState( state + 1);
     }
 
     const decrement = ( factor: number = 1) =>{
