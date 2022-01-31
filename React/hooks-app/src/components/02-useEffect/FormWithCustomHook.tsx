@@ -41,6 +41,7 @@ export const FormWithCustomHook = () => {
                     autoComplete='off'
                     value={ name }
                     onChange={ handleInput }
+                    id='name'
             />
         </div>
 

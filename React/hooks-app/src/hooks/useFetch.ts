@@ -12,7 +12,7 @@ export const useFetch = ( url: string) => {
         data: null,
         loading: true,
         error: null
-    });
+    }); 
 
     // variable que nos ayudara a manejar si el componente
     // esta montado o no 
@@ -40,6 +40,13 @@ export const useFetch = ( url: string) => {
                         error: null
                     });
                 }
+        })
+        .catch( () =>{
+            setState( {
+                data: null,
+                loading: false,
+                error: 'Fatal error'
+            });
         });
     }, [url]);
     
