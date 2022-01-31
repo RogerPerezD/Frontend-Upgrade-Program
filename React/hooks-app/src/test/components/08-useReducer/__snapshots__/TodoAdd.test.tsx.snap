@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in <TodoAdd/> should show the component successfully 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    autoComplete="off"
+    className="form-control"
+    name="description"
+    onChange={[Function]}
+    placeholder="Learn...."
+    type="text"
+    value=""
+  />
+  <div
+    className="d-grid gap-1"
+  >
+    <button
+      className="btn btn-outline-primary mt-1"
+      type="submit"
+    >
+      Add
+    </button>
+  </div>
+</form>
+`;

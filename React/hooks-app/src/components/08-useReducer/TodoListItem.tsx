@@ -8,7 +8,7 @@ type TodoListItemProps = {
     handleDeleteTodo( todo: Todo): void
 }
 
-export const TodoListItem = React.memo(({ todo, index, handleToggleTodo, handleDeleteTodo }: TodoListItemProps) => {
+export const TodoListItem = ({ todo, index, handleToggleTodo, handleDeleteTodo }: TodoListItemProps) => {
     console.log('list item renderizado');
     return (
     <li className='list-group-item'>
@@ -23,4 +23,4 @@ export const TodoListItem = React.memo(({ todo, index, handleToggleTodo, handleD
         </button>
     </li>
   );
-});
+};
