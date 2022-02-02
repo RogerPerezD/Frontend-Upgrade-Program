@@ -6,7 +6,7 @@ import { AuthContext } from '../../auth/authContext';
 export const LoginScreen = () => {
     const navigate = useNavigate();
 
-    const { user, dispatch } = useContext(AuthContext);
+    const { dispatch } = useContext(AuthContext);
 
     const handleLogin = ()=>{
         
@@ -18,8 +18,9 @@ export const LoginScreen = () => {
             }
         };
         dispatch( action );
-        
-        navigate('/marvel', {
+
+        const lastPath = localStorage.getItem('lastRoute') || '/marvel';
+        const path = navigate(lastPath, {
             replace: true
         });
     }
