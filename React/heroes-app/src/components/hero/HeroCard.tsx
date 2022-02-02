@@ -8,7 +8,7 @@ type HeroCardProps = {
   first_appearance: string,
   characters: string,
 }
-
+ 
 export const HeroCard = ({  
       id,
       superhero,
@@ -21,7 +21,7 @@ export const HeroCard = ({
     const imagePath = `/assets/images/${id}.jpg`;
 
     return (
-      <div className="col">
+      <div className="col animate__animated animate__fadeIn">
         <div className="card">
           <div className="row no-gutters">
             <div className="col-4">
