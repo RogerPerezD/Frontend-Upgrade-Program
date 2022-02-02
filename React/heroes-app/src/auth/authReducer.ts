@@ -4,7 +4,7 @@ export type UserState = { logged: boolean, name?: string }
 
 export type ActionReducer = {
     type: string,
-    payload: UserState
+    payload?: UserState
 }
 
 export const authReducer = ( state: UserState, action: ActionReducer):UserState =>{
