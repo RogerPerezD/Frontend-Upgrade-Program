@@ -64,6 +64,4 @@ describe('Test in NavBar', () => {
         });
 
     });
-    
-    
 });
