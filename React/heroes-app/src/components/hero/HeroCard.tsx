@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+const heroImages = require.context('../../assets/images', true);
 type HeroCardProps = {
   id: string,
   superhero: string,
@@ -18,14 +18,14 @@ export const HeroCard = ({
       characters
   }:HeroCardProps) => {
 
-    const imagePath = `/assets/images/${id}.jpg`;
+    // const imagePath = `/assets/images/${id}.jpg`;
 
     return (
       <div className="col animate__animated animate__fadeIn">
         <div className="card">
           <div className="row no-gutters">
             <div className="col-4">
-              <img src={ imagePath } alt={ superhero } className="card-img"/>
+              <img src={heroImages(`./${id}.jpg`)} alt={ superhero } className="card-img"/>
             </div>
             <div className="col-8">
               <div className="card-body">
