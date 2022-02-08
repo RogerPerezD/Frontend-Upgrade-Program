@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { FormEvent } from 'react';
 import { useDispatch } from "react-redux";
-import { login, startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
-// import { AppDispatch } from '../../store/store';
+import { startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
 
 export const LoginScreen = () => {
 
@@ -25,7 +24,7 @@ export const LoginScreen = () => {
     const handleGoogleLogin = () =>{
         dispatch( startGoogleLogin() );
     }
-
+ 
     const { email, password} = formValues;
     return (
         <>

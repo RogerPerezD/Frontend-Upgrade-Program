@@ -4,7 +4,7 @@ type FieldsForm = {
     name?: string,
     email: string,
     password: string,
-    confirm?: string
+    password2?: string
 }
 
 export const useForm = ( initialState = {} as FieldsForm ): [FieldsForm, (e: FormEvent<HTMLInputElement>)=>void, ()=>void ] => {

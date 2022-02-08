@@ -1,7 +1,6 @@
 import { types } from '../types/types';
 import { UserAction, DispatchType } from '../reducers/authReducer';
 import { googleAuthProvider,firebase } from '../firebase/firebaseConfig';
-// import  from 'firebase';
 
 export const startLoginEmailPassword = ( email: string, password: string) =>{
     return (( dispatch: DispatchType ) =>{
@@ -14,8 +13,8 @@ export const startLoginEmailPassword = ( email: string, password: string) =>{
 export const startGoogleLogin = () =>{
     return ( dispatch: DispatchType ) =>{
         firebase.auth().signInWithPopup( googleAuthProvider )
-        .then( userCred => {
-            console.log(userCred);
+        .then( ({user}) => {
+            dispatch( login( (user?.uid as string), (user?.displayName as string)))
         });
     }
 }
