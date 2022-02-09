@@ -20,7 +20,7 @@ export const useForm = ( initialState = {} as FieldsForm ): [FieldsForm, (e: For
 
         setValues({
             ...values,
-            [ currentTarget .name ]: currentTarget .value
+            [ currentTarget.name ]: currentTarget.value
         });
 
     }

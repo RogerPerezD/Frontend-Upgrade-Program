@@ -1,15 +1,34 @@
 import { types } from '../types/types';
 import { UIAction } from '../reducers/uiReducer';
 
-export const setError = ( err: string ): UIAction=>{
+const setError = ( err: string ): UIAction=>{
     return {
         type: types.uiSetError,
         payload: err
     }
 }
 
-export const removeError = (): UIAction=>{
+const removeError = (): UIAction=>{
     return {
         type: types.uiRemoveError
     }
+}
+
+const startLoading = (): UIAction =>{
+    return {
+        type: types.uiStartLoading
+    }
+}
+
+const finishLoading = (): UIAction =>{
+    return {
+        type: types.uiFinishLoading
+    }
+}
+
+export {
+    setError,
+    removeError,
+    startLoading,
+    finishLoading
 }

@@ -1,35 +1,44 @@
 import { Link } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { FormEvent } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { startLoginEmailPassword, startGoogleLogin } from '../../actions/auth';
+import { UIState } from '../../reducers/uiReducer';
+import { RootState } from '../../store/store';
 
 export const LoginScreen = () => {
 
     const dispatch = useDispatch();
+    const { msgError,loading }: UIState = useSelector( (state: RootState) => state.ui);
 
     const [ formValues, handleInputChange ] = useForm({
-        email: 'roger@mail.com',
-        password: '1234'
+        email: 'rogi@mail.com',
+        password: '123456'
     });
 
+    const { email, password} = formValues;
 
     const handleLogin = ( e: FormEvent) =>{
         e.preventDefault();
-        console.log(email, password);
-        // dispatch( login( '543bgds', 'Roger'));
-        dispatch(startLoginEmailPassword( '543bgds', 'Roger'));
+        dispatch(startLoginEmailPassword( email, password));
     }
 
     const handleGoogleLogin = () =>{
         dispatch( startGoogleLogin() );
     }
  
-    const { email, password} = formValues;
+    
     return (
         <>
             <h3 className="auth__title"> Login </h3>
             <form onSubmit={ handleLogin }>
+                {
+                    msgError.length > 0
+                    &&
+                    <div className="auth__alert-error">
+                        {msgError}
+                    </div>
+                }
                 <input 
                     type="email" 
                     name="email" 
@@ -48,8 +57,8 @@ export const LoginScreen = () => {
                     value={ password }
                     onChange={ handleInputChange}
                 />
-                <button type="submit" className="btn btn-primary btn-block">
-                    Login
+                <button type="submit" className="btn btn-primary btn-block" disabled={ loading }>
+                Login
                 </button>
 
                 <div className="auth__social-networks">

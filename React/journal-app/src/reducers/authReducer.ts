@@ -7,17 +7,17 @@ export type UserState = {
 
 export type UserAction = {
     type: string,
-    payload: UserState
+    payload?: UserState
 }
 
-export type DispatchType = (args: UserAction) => UserAction;
+export type DispatchTypeUser = (args: UserAction) => UserAction;
 
 export const authReducer = ( state = {} as UserState, action: UserAction ) =>{
     switch (action.type) {
         case types.login:
             return {
-                uid: action.payload.uid,
-                name: action.payload.name
+                uid: action.payload?.uid,
+                name: action.payload?.name
             };
         case types.logout:
             return {};

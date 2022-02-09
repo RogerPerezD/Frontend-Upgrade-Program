@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setError, removeError } from '../../actions/ui';
 import { UIState } from '../../reducers/uiReducer';
 import { RootState } from '../../store/store';
+import { startRegisterWhitEmailAndPassword } from '../../actions/auth';
 
 
 
@@ -28,7 +29,7 @@ export const RegisterScreen = () => {
     const handleRegister = (e: FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if (isFormValid()) {
-            console.log('Formulario correct');
+            dispatch( startRegisterWhitEmailAndPassword( email, password, name as string));
         }
     }
 

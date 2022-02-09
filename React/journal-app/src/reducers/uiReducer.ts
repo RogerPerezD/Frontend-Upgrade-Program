@@ -15,6 +15,8 @@ const initialState: UIState = {
     msgError: ''
 }
 
+export type DispatchTypeUI = (args: UIAction) => UIAction;
+
 export const uiReducer = ( state = initialState, action: UIAction) =>{
 
     switch ( action.type) {
@@ -27,7 +29,17 @@ export const uiReducer = ( state = initialState, action: UIAction) =>{
             return {
                 ...state,
                 msgError: ''
-            }    
+            }   
+        case types.uiStartLoading:
+            return {
+                ...state,
+                loading: true
+            } 
+        case types.uiFinishLoading:
+        return {
+            ...state,
+            loading: false
+        }    
     
         default:
             return state;
