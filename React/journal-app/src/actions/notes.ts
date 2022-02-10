@@ -21,7 +21,7 @@ export const startNewNote = (date: number) => {
     }
 }
 
-const noteActive = ( note: Notes ) =>{
+export const noteActive = ( note: Notes ) =>{
     return {
         type: types.notesActive,
         payload: note

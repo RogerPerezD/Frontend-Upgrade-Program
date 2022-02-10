@@ -25,14 +25,14 @@ const initialState = {
 
 export type DispatchTypeNote = (args: NotesAction) => NotesAction;
 
-export const notesReducer = ( state = initialState, action: NotesAction) =>{
+export const notesReducer = ( state = initialState, action: NotesAction): NotesState =>{
     switch (action.type) {
         case types.notesActive:
             return {
                 ...state,
                 active: {
                     // Lo hacemos asi para romper la referencia
-                    ...action.payload
+                    ...action.payload as Notes
                 }
             }
         case types.notesLoad:
@@ -43,7 +43,7 @@ export const notesReducer = ( state = initialState, action: NotesAction) =>{
         case types.notesAddNew:
             return {
                 ...state,
-                notes: [...state.notes, action.payload]
+                notes: [...state.notes, action.payload as Notes]
             }
         default:
             return state;
