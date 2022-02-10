@@ -4,6 +4,7 @@ import { types } from '../types/types';
 import { RootState } from '../store/store';
 import { DispatchTypeUser } from '../reducers/authReducer';
 import { loadNotes } from '../helpers/loadNotes';
+import Swal from 'sweetalert2';
 
 export const startNewNote = (date: number) => {
     return async (dispatch: DispatchTypeNote, getState: ()=> RootState) => {
@@ -21,7 +22,7 @@ export const startNewNote = (date: number) => {
     }
 }
 
-export const noteActive = ( note: Notes ) =>{
+export const noteActive = ( note: Notes ): NotesAction =>{
     return {
         type: types.notesActive,
         payload: note
@@ -36,16 +37,42 @@ export const startLoadingNotes = () =>{
     }
 }
 
-const setNotes = (notes: Notes[]) => {
+const setNotes = (notes: Notes[]): NotesAction => {
     return {
         type: types.notesLoad,
         payload: notes
     }
 }
 
-const addNewNote = (note: Notes): NotesAction =>{
+export const startSaveNote = ( note: Notes) => {
+    return async (dispatch: DispatchTypeNote, getState: ()=> RootState) => {
+        const { uid } = getState().auth;
+
+        if (!note.imageUrl) {
+            delete note.imageUrl;
+        }
+
+        const { id, ...noteToFirestore} = note;
+        // console.log(noteToFirestore);
+
+        await db.doc(`${ uid }/journal/notes/${ note.id }`).update(noteToFirestore);
+
+        dispatch( refreshNote( note ));
+
+        Swal.fire('Saved', note.title, 'success');
+    }
+}
+
+export const refreshNote = (note: Notes): NotesAction =>{
     return {
-        type: types.notesAddNew,
+        type: types.notesUpdated,
         payload: note
     }
 }
+
+// const addNewNote = (note: Notes): NotesAction =>{
+//     return {
+//         type: types.notesAddNew,
+//         payload: note
+//     }
+// }

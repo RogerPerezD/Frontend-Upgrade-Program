@@ -1,11 +1,14 @@
 import { NotesAppBar } from './NotesAppBar'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
-import { NotesState } from '../../reducers/notesReducer';
+import { NotesState, Notes } from '../../reducers/notesReducer';
 import { useFormNote } from '../../hooks/useFormNote';
 import { useEffect, useRef } from 'react';
+import { noteActive } from '../../actions/notes';
 
 export const NoteScreen = () => {
+    const dispatch = useDispatch();
+
     const { active:note }: NotesState = useSelector( (state: RootState) => state.notes);
     
     const [{body, title}, handleInputChange, reset] = useFormNote( {title: note?.title as string, body: note?.body as string} );
@@ -19,7 +22,13 @@ export const NoteScreen = () => {
             reset( {title: note?.title as string, body: note?.body as string} );
             activeID.current = note?.id;
         }
-    }, [note, activeID])
+    }, [note, activeID]);
+
+    // Update the current note
+    useEffect(() => {
+        dispatch( noteActive({ ...note as Notes, title: title, body: body}) );
+    }, [title, body])
+    
     
     return (
         <div className="notes__main-content">
