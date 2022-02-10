@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { types } from '../types/types';
 import { UserAction, DispatchTypeUser } from '../reducers/authReducer';
 import { googleAuthProvider,firebase } from '../firebase/firebaseConfig';
@@ -18,6 +19,12 @@ export const startLoginEmailPassword = ( email: string, password: string) =>{
             .catch( (e: Error) =>{
                 dispatch( setError(e.message) );
                 dispatch( finishLoading() );
+                Swal.fire({
+                    title: 'Error!',
+                    text: e.message,
+                    icon: 'error',
+                    confirmButtonText: 'Confirm'
+                });
             });
     });
 }

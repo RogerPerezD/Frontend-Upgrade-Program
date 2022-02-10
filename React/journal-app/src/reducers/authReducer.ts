@@ -12,15 +12,15 @@ export type UserAction = {
 
 export type DispatchTypeUser = (args: UserAction) => UserAction;
 
-export const authReducer = ( state = {} as UserState, action: UserAction ) =>{
+export const authReducer = ( state = {} as UserState, action: UserAction ): UserState =>{
     switch (action.type) {
         case types.login:
             return {
-                uid: action.payload?.uid,
-                name: action.payload?.name
+                uid: action.payload?.uid as string,
+                name: action.payload?.name as string
             };
         case types.logout:
-            return {};
+            return {} as UserState;
     
         default:
             return state;

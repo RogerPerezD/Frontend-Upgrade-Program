@@ -11,6 +11,9 @@ import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
+import { loadNotes } from '../helpers/loadNotes';
+import { Notes } from '../reducers/notesReducer';
+import { startLoadingNotes } from '../actions/notes';
 
 export const AppRouter = () => {
 
@@ -23,11 +26,16 @@ export const AppRouter = () => {
             if (user?.uid && user?.displayName) {
                 dispatch( login( user.uid, user.displayName));
                 setIsAuth(true);
+
+                dispatch( startLoadingNotes() );
+
             }else{
                 setIsAuth(false);
             }
             setChecking(false);
         });
+
+        
     
     }, [ dispatch ]);
 

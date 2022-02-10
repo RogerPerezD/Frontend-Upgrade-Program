@@ -7,7 +7,7 @@ type Props = {
 } & RouteProps;
 
 export const PublicRoutes = ({ isAuth, component: Component, ...rest}: Props) => {
-    console.log(isAuth);
+
     const renderComponent = () => (
         isAuth ?
             () => {
