@@ -1,3 +1,4 @@
+import 'animate.css';
 import moment from "moment";
 import { useDispatch } from 'react-redux';
 import { Notes } from '../../reducers/notesReducer';
@@ -20,7 +21,9 @@ export const JournalEntry = ( {id,title, body, date, imageUrl}:JournalEntryProps
     }
     
     return (
-        <div className="journal__entry pointer" onClick={ handleEntryClick }>
+        <div 
+        className="journal__entry pointer animate__animated animate__fadeIn animate__faster"  
+        onClick={ handleEntryClick }>
             
             {
                 imageUrl &&
