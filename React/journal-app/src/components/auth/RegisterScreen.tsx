@@ -1,3 +1,4 @@
+import 'animate.css';
 import { Link } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { FormEvent } from 'react';
@@ -52,7 +53,10 @@ export const RegisterScreen = () => {
     return (
         <>
         <h3 className="auth__title"> Register </h3>
-            <form onSubmit={ handleRegister }>
+            <form 
+            onSubmit={ handleRegister }
+            className = "animate__animated animate__fadeIn animate__faster"
+            >
 
                 {
                     msgError.length > 0

@@ -2,7 +2,6 @@ import React from 'react'
 import { JournalEntries } from './JournalEntries'
 import { useDispatch, useSelector } from 'react-redux';
 import { startLogout } from '../../actions/auth';
-import { UserState } from '../../reducers/authReducer';
 import { RootState } from '../../store/store';
 import { startNewNote } from '../../actions/notes';
 
@@ -15,7 +14,6 @@ export const Sidebar = () => {
     }
     
     const handleAddNote = () => {
-        // console.log('click');
         dispatch( startNewNote( new Date().getTime() ) );
     }
     return (

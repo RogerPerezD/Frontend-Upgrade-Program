@@ -1,5 +1,5 @@
 // import Swal from 'sweetalert2';
-
+import 'animate.css';
 import { Link } from "react-router-dom";
 import { useForm } from '../../hooks/useForm';
 import { FormEvent } from 'react';
@@ -28,24 +28,14 @@ export const LoginScreen = () => {
     const handleGoogleLogin = () =>{
         dispatch( startGoogleLogin() );
     }
-
-    // useEffect(() => {
-    //     if(msgError.length > 0){
-    //         Swal.fire({
-    //             title: 'Error!',
-    //             text: msgError,
-    //             icon: 'error',
-    //             confirmButtonText: 'Cool'
-    //         })
-    //     }
-    // }, [msgError])
-    
-
     
     return (
         <>
             <h3 className="auth__title"> Login </h3>
-            <form onSubmit={ handleLogin }>
+            <form 
+            onSubmit={ handleLogin }
+            className = "animate__animated animate__fadeIn animate__faster"
+            >
                 {
                     msgError.length > 0
                     &&

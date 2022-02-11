@@ -13,6 +13,7 @@
     "@types/react-redux": "^7.1.22",
     "@types/react-router-dom": "^5.3.3",
     "@types/validator": "^13.7.1",
+    "animate.css": "^4.1.1",
     "firebase": "^8.10.0",
     "moment": "^2.29.1",
     "node-sass": "^7.0.1",
