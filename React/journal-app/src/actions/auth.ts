@@ -4,6 +4,8 @@ import { UserAction, DispatchTypeUser } from '../reducers/authReducer';
 import { googleAuthProvider,firebase } from '../firebase/firebaseConfig';
 import { DispatchTypeUI } from '../reducers/uiReducer';
 import { finishLoading, removeError, setError, startLoading } from './ui';
+import { DispatchTypeNote } from '../reducers/notesReducer';
+import { noteLogout } from './notes';
 
 export const startLoginEmailPassword = ( email: string, password: string) =>{
     return (( dispatch: (DispatchTypeUI & DispatchTypeUser) ) =>{
@@ -64,9 +66,10 @@ export const  startRegisterWhitEmailAndPassword = ( email: string, password: str
 }
 
 export const startLogout = () =>{
-    return async ( dispatch: DispatchTypeUser )=>{
+    return async ( dispatch: (DispatchTypeUser & DispatchTypeNote) )=>{
         await firebase.auth().signOut();
         dispatch( logout() );
+        dispatch( noteLogout() );
     }
 }
 

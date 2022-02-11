@@ -4,7 +4,7 @@ import { authReducer } from '../reducers/authReducer';
 import { uiReducer } from '../reducers/uiReducer';
 import { notesReducer } from '../reducers/notesReducer';
 
-const reducers = combineReducers({
+const reducers = combineReducers({ 
     auth: authReducer,
     ui: uiReducer,
     notes: notesReducer
@@ -23,7 +23,7 @@ export const store = createStore(
         );
 
 // Tipar los diferentes reducers dentro de nuestro redux
-export type RootState = ReturnType<typeof reducers>
+export type RootState = ReturnType<typeof reducers>;
 
 // export type RootState = ReturnType< typeof store.getState>;
 // export type AppDispatch = typeof store.dispatch;

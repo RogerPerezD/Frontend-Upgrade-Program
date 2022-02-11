@@ -4,7 +4,7 @@ import { RootState } from '../../store/store';
 import { NotesState, Notes } from '../../reducers/notesReducer';
 import { useFormNote } from '../../hooks/useFormNote';
 import { useEffect, useRef } from 'react';
-import { noteActive } from '../../actions/notes';
+import { noteActive, startDeleting } from '../../actions/notes';
 
 export const NoteScreen = () => {
     const dispatch = useDispatch();
@@ -22,14 +22,17 @@ export const NoteScreen = () => {
             reset( {title: note?.title as string, body: note?.body as string} );
             activeID.current = note?.id;
         }
-    }, [note, activeID]);
+    }, [note, activeID, reset]);
 
-    // Update the current note
+    // Update the current note in the store
     useEffect(() => {
         dispatch( noteActive({ ...note as Notes, title: title, body: body}) );
-    }, [title, body])
+    }, [title, body, dispatch ]);
     
-    
+    const handleDelete = () =>{
+        dispatch( startDeleting() );
+    }
+
     return (
         <div className="notes__main-content">
             
@@ -59,14 +62,19 @@ export const NoteScreen = () => {
                     (note?.imageUrl) &&
                     <div className="notes__image">
                     <img 
-                        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+                        src={note.imageUrl}
                         alt="imagen"
                     />
                     </div>
                 }
-
-
             </div>
+
+            <button 
+            className='btn btn-danger'
+            onClick={ handleDelete }
+            >
+                Delete
+            </button>
 
         </div>
     )

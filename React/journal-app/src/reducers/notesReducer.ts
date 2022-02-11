@@ -18,7 +18,7 @@ export type NotesAction = {
     payload?: Notes | Notes []
 }
 
-const initialState = {
+const initialState: NotesState = {
     notes: [],
     active: null
 }
@@ -35,15 +35,15 @@ export const notesReducer = ( state = initialState, action: NotesAction): NotesS
                     ...action.payload as Notes
                 }
             }
+        case types.notesAddNew:
+        return {
+            ...state,
+            notes: [...state.notes, action.payload as Notes]
+        }
         case types.notesLoad:
             return {
                 ...state,
                 notes: [ ...action.payload as Notes[]]
-            }
-        case types.notesAddNew:
-            return {
-                ...state,
-                notes: [...state.notes, action.payload as Notes]
             }
         case types.notesUpdated:
             const noteUpdate:Notes = action.payload as Notes;
@@ -54,7 +54,16 @@ export const notesReducer = ( state = initialState, action: NotesAction): NotesS
                     noteUpdate
                     : note
                     ))
-            };
+            }
+        case types.notesDelete:
+            const noteToDelete: Notes = action.payload as Notes;
+            return {
+                ...state,
+                active: null,
+                notes: state.notes.filter( (note: Notes) => (note.id !== noteToDelete.id))
+            }
+        case types.notesLogoutCleaning:
+            return initialState;
         default:
             return state;
     }

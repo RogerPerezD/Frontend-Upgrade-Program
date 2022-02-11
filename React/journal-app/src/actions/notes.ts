@@ -1,10 +1,10 @@
 import { db } from '../firebase/firebaseConfig';
-import { DispatchTypeNote, NotesAction, Notes } from '../reducers/notesReducer';
+import { DispatchTypeNote, NotesAction, Notes, NotesState } from '../reducers/notesReducer';
 import { types } from '../types/types';
 import { RootState } from '../store/store';
-import { DispatchTypeUser } from '../reducers/authReducer';
 import { loadNotes } from '../helpers/loadNotes';
 import Swal from 'sweetalert2';
+import { fileUpload } from '../helpers/fileUpload';
 
 export const startNewNote = (date: number) => {
     return async (dispatch: DispatchTypeNote, getState: ()=> RootState) => {
@@ -18,6 +18,7 @@ export const startNewNote = (date: number) => {
 
         const id = docRef.id;
         dispatch( noteActive({id, ...newNote}) );
+        dispatch( addNewNote({id, ...newNote}) );
         
     }
 }
@@ -25,6 +26,13 @@ export const startNewNote = (date: number) => {
 export const noteActive = ( note: Notes ): NotesAction =>{
     return {
         type: types.notesActive,
+        payload: note
+    }
+}
+
+const addNewNote = (note: Notes): NotesAction =>{
+    return {
+        type: types.notesAddNew,
         payload: note
     }
 }
@@ -53,9 +61,8 @@ export const startSaveNote = ( note: Notes) => {
         }
 
         const { id, ...noteToFirestore} = note;
-        // console.log(noteToFirestore);
 
-        await db.doc(`${ uid }/journal/notes/${ note.id }`).update(noteToFirestore);
+        await db.doc(`${ uid }/journal/notes/${ id }`).update(noteToFirestore);
 
         dispatch( refreshNote( note ));
 
@@ -70,9 +77,58 @@ export const refreshNote = (note: Notes): NotesAction =>{
     }
 }
 
-// const addNewNote = (note: Notes): NotesAction =>{
-//     return {
-//         type: types.notesAddNew,
-//         payload: note
-//     }
-// }
+export const startUploadingFile = (file: File) =>{
+    return async (dispatch: DispatchTypeNote, getState: ()=> RootState) =>{
+        const { active:activeNote }: NotesState = getState().notes;
+        const { uid } = getState().auth;
+
+        // Show loading modal
+        Swal.fire({
+            title: 'Uploading...',
+            text: 'Please wait...',
+            allowOutsideClick: false,
+            didOpen: () =>{
+                Swal.showLoading()
+            }
+        });
+
+        const fileUrl = await fileUpload( file );
+        
+        activeNote!.imageUrl = fileUrl;
+
+        const { id, ...noteToFirestore} = activeNote as Notes;
+
+        await db.doc(`${ uid }/journal/notes/${ id }`).update(noteToFirestore);
+
+        dispatch( refreshNote( activeNote as Notes ));
+
+        // Close loading modal
+        Swal.close();
+        Swal.fire('Saved', activeNote?.title , 'success');
+    }
+}
+
+export const startDeleting = () => {
+    return async (dispatch: DispatchTypeNote, getState: ()=> RootState) =>{
+        
+        const { active:noteActive }: NotesState = getState().notes;
+        const { uid } = getState().auth;
+
+        await db.doc(`${ uid }/journal/notes/${ noteActive?.id }`).delete();
+
+        dispatch( deleteNote(noteActive as Notes) );
+    }
+}
+
+const deleteNote = (note: Notes): NotesAction =>{
+    return {
+        type: types.notesDelete,
+        payload: note
+    }
+}
+
+export const noteLogout = ():NotesAction => {
+    return {
+        type: types.notesLogoutCleaning
+    }
+}

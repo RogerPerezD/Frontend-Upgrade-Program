@@ -2,7 +2,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Redirect,
-  } from "react-router-dom";
+} from "react-router-dom";
 import { AuthRouter } from "./AuthRouter";
 import { JournalScreen } from '../components/journal/JournalScreen';
 import { useEffect, useState } from 'react';
@@ -11,8 +11,6 @@ import { useDispatch } from 'react-redux';
 import { login } from '../actions/auth';
 import { PrivateRoutes } from './PrivateRoutes';
 import { PublicRoutes } from './PublicRoutes';
-import { loadNotes } from '../helpers/loadNotes';
-import { Notes } from '../reducers/notesReducer';
 import { startLoadingNotes } from '../actions/notes';
 
 export const AppRouter = () => {
@@ -35,8 +33,6 @@ export const AppRouter = () => {
             setChecking(false);
         });
 
-        
-    
     }, [ dispatch ]);
 
     if (checking) {
@@ -47,7 +43,6 @@ export const AppRouter = () => {
         <Router>
             <div>
             <Switch>
-                {/* <Route path="/auth" component={ AuthRouter }/> */}
                 <PublicRoutes
                     isAuth={ isAuth } 
                     path="/auth" 
