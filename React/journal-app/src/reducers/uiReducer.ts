@@ -17,13 +17,13 @@ const initialState: UIState = {
 
 export type DispatchTypeUI = (args: UIAction) => UIAction;
 
-export const uiReducer = ( state = initialState, action: UIAction) =>{
+export const uiReducer = ( state = initialState, action: UIAction): UIState =>{
 
     switch ( action.type) {
         case types.uiSetError:
             return {
                 ...state,
-                msgError: action.payload
+                msgError: action.payload as string
             }
         case types.uiRemoveError:
             return {
