@@ -77,7 +77,7 @@ export const refreshNote = (note: Notes): NotesAction =>{
     }
 }
 
-export const startUploadingFile = (file: File) =>{
+export const startUploadingFile = (file: File | Buffer) =>{
     return async (dispatch: DispatchTypeNote, getState: ()=> RootState) =>{
         const { active:activeNote }: NotesState = getState().notes;
         const { uid } = getState().auth;
@@ -93,6 +93,8 @@ export const startUploadingFile = (file: File) =>{
         });
 
         const fileUrl = await fileUpload( file );
+
+        console.log(fileUrl,'ey aqui')
         
         activeNote!.imageUrl = fileUrl;
 
