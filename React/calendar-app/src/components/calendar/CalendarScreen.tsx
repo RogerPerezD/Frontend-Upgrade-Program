@@ -6,6 +6,7 @@ import { Navbar } from '../ui/Navbar';
 import { messages } from '../../helpers/calendar-messages';
 import { CalendarEvent } from './CalendarEvent';
 import { useState } from 'react';
+import { CalendarModal } from './CalendarModal';
 
 moment.locale('es'); //Change dates to spanish
 
@@ -63,6 +64,7 @@ export const CalendarScreen = () => {
   return (
     <div className='calendar-screen'>
       <Navbar/>
+
       <Calendar
       localizer={localizer}
       events={events}
@@ -78,6 +80,8 @@ export const CalendarScreen = () => {
       onView ={ onViewChange }
       view ={ lastView as View}
       />
+
+      <CalendarModal/>
     </div>
   )
 }
