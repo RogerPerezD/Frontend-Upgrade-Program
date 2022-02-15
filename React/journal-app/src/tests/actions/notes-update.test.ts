@@ -51,4 +51,5 @@ describe('test in startUpload', () => {
         const imageUrl = docRef.data()?.imageUrl;
         expect( imageUrl ).toBe('https://hola-mundo/cosa2.jpg');
     });
+
 });

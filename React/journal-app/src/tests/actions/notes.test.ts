@@ -19,14 +19,7 @@ const initialState = {
         name: 'Roger'
     },
     ui: {} as UIState,
-    notes: {
-        // notes: [] as Notes[],
-        active: {
-            id: '3JlQfrQkJpMx73it8LaZ',
-            body: 'update file',
-            title: 'titi'
-        }
-    } as NotesState
+    notes: {} as NotesState
 };
 
 let store = mockStore(initialState);

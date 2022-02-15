@@ -12,7 +12,7 @@ export const startLoginEmailPassword = ( email: string, password: string) =>{
 
         dispatch( startLoading() );
 
-        firebase.auth().signInWithEmailAndPassword( email, password)
+        return firebase.auth().signInWithEmailAndPassword( email, password)
             .then(({user}) => {
                 dispatch( login( (user?.uid as string), (user?.displayName as string)));
                 dispatch( removeError() );
@@ -40,7 +40,7 @@ export const startGoogleLogin = () =>{
     }
 }
 
-export const login = ( uid: string, displayName: string) =>{
+export const login = ( uid: string, displayName: string) =>{ 
     const action: UserAction = {
         type: types.login,
         payload: {

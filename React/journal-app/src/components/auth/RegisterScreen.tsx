@@ -14,7 +14,7 @@ import { startRegisterWhitEmailAndPassword } from '../../actions/auth';
 export const RegisterScreen = () => {
     const initialState = {
         name: 'Rogelio',
-        email: 'rogi@mail.com',
+        email: '',
         password: '123456',
         password2: '123456'
     }
@@ -31,6 +31,7 @@ export const RegisterScreen = () => {
         e.preventDefault();
         if (isFormValid()) {
             dispatch( startRegisterWhitEmailAndPassword( email, password, name as string));
+            console.log('oa desde el form otra vez');
         }
     }
 
