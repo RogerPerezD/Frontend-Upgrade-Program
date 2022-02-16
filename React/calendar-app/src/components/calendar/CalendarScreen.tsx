@@ -1,35 +1,37 @@
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import 'moment/locale/es';
-import  { Event, Calendar, momentLocalizer, stringOrDate, View } from 'react-big-calendar';
+import  { Calendar, momentLocalizer, stringOrDate, View } from 'react-big-calendar';
 import { Navbar } from '../ui/Navbar';
 import { messages } from '../../helpers/calendar-messages';
 import { CalendarEvent } from './CalendarEvent';
 import { useState } from 'react';
 import { CalendarModal } from './CalendarModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModalAction } from '../../actions/ui';
+import { eventSetActive } from '../../actions/events';
+import {  Event } from '../../reducers/calendarReducer';
+import { AddNewFab } from '../ui/AddNewFab';
+import { RootState } from '../../store/store';
 
 moment.locale('es'); //Change dates to spanish
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
-export type CustomEvent = Event & {
-  user: {
-    id: string,
-    name: string
-  }
-}
-
-const events: CustomEvent[] = [{
-  title: 'Meeting important',
-  start: moment().toDate(),
-  end: moment().add( 2, 'hours' ).toDate(),
-  user: {
-    id: '123',
-    name: 'Roger'
-  }
-}];
+// const events: Event[] = [{
+//   title: 'Meeting important',
+//   start: moment().toDate(),
+//   end: moment().add( 2, 'hours' ).toDate(),
+//   user: {
+//     id: '123',
+//     name: 'Roger'
+//   }
+// }];
 
 export const CalendarScreen = () => {
+
+  const dispatch = useDispatch();
+  const { events } = useSelector((state: RootState)=> state.calendar);
 
   const [lastView, setLastView] = useState<string>(localStorage.getItem('lastView') || 'month')
 
@@ -47,12 +49,14 @@ export const CalendarScreen = () => {
             };
   }
 
-  const onDoubleClick = (e: CustomEvent) => {
-    console.log(e);
+  const onDoubleClick = (e: Event) => {
+    // console.log(e);
+    dispatch( openModalAction() );
   }
 
-  const onSelectEvent = (e: CustomEvent) => {
-    console.log(e);
+  const onSelectEvent = (e: Event) => {
+    // console.log(e);
+    dispatch( eventSetActive(e) );
   }
 
   const onViewChange = (view: View) => {
@@ -81,6 +85,7 @@ export const CalendarScreen = () => {
       view ={ lastView as View}
       />
 
+      <AddNewFab/>
       <CalendarModal/>
     </div>
   )
