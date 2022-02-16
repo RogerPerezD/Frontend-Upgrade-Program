@@ -1,17 +1,20 @@
 const express = require('express');
-
+require('dotenv').config();
 // Create server
 const app = express();
 
+// Directory public
+app.use( express.static('public') );
+
 // Routes
-app.get('/',(req, resp)=>{
+// app.get('/',(req, resp)=>{
     
-    resp.json({
-        ok: true
-    })
-});
+//     resp.json({
+//         ok: true
+//     });
+// });
 
 // Listen request
-app.listen( 4000, ()=>{
-    console.log('Sevidor corriendo en puerto 4000')
+app.listen( process.env.PORT, ()=>{
+    console.log(`Sevidor corriendo en puerto ${process.env.PORT}`)
 });
