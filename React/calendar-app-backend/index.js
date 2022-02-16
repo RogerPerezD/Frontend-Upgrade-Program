@@ -6,6 +6,9 @@ const app = express();
 // Directory public
 app.use( express.static('public') );
 
+// Lectura y parseo del body de la peticion
+app.use( express.json() );
+
 // Routes
 app.use('/api/auth', require('./routes/auth'))
 
