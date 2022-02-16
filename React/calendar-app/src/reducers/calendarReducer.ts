@@ -63,6 +63,12 @@ export const calendarReducer = ( state = initialState, action: EventAction): Eve
                 ...state,
                 events: state.events.map((event) => (event.id === eventToUpdate.id) ? eventToUpdate : event)
             };
+        case types.eventDeleted:
+            return {
+                ...state,
+                events: state.events.filter((event) => (event.id !== state.activeEvent?.id) ),
+                activeEvent: null
+            };
     
         default:
             return state;

@@ -28,3 +28,9 @@ export const eventUpdated = ( event: Event ) =>{
         payload: event
     }
 }
+
+export const eventDeleted = () =>{
+    return {
+        type: types.eventDeleted
+    }
+}
