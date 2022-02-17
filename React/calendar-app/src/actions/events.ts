@@ -1,5 +1,5 @@
 // import { CustomEvent } from '../components/calendar/CalendarScreen';
-import { EventAction, Event } from '../reducers/calendarReducer';
+import {  Event } from '../reducers/calendarReducer';
 import { types } from '../types/types';
 
 export const eventAddNew = ( event: Event ) =>{
