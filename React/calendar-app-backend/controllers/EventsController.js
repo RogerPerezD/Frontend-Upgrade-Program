@@ -1,6 +1,7 @@
 const { response } = require('express');
 
 const index = (req, resp = response) =>{
+    
     return resp.status(200).json({
         ok: true,
         msg: 'getEvents'
@@ -8,6 +9,7 @@ const index = (req, resp = response) =>{
 }
 
 const store = ( req, resp = response ) =>{
+    console.log(req.body);
     return resp.status(201).json({
         ok: true,
         msg: 'createEvents'
