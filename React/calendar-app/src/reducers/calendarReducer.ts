@@ -1,9 +1,7 @@
 import moment from 'moment';
 import { types } from '../types/types';
-interface User{
-    id: string;
-    name: string;
-}
+import { User } from './authReducer';
+
 
 export interface Event {
     id: number;
