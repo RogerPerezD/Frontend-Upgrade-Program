@@ -20,7 +20,7 @@ const validateJWT = (req, resp = response, next) =>{
             process.env.SECRET_JWT_SEED
         );
         // console.log(payload);
-        req.id = payload.uid;
+        req.uid = payload.uid;
         req.name = payload.name;
 
     } catch (error) {

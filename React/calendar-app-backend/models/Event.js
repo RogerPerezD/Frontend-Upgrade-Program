@@ -6,7 +6,7 @@ const EventSchema = Schema({
         required: true
     },
     notes: {
-        type: string
+        type: String
     },
     start: {
         type: Date,
@@ -18,9 +18,17 @@ const EventSchema = Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     }
 
+});
+
+// Customize output
+EventSchema.method('toJSON', function (){
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
 });
 
 module.exports = model('Event', EventSchema);

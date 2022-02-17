@@ -83,7 +83,7 @@ const loginUser = async(req, resp = response)=>{
 }
 
 const revalidateToken = async(req, resp = response)=>{
-    const  uid = req.id;
+    const  uid = req.uid;
     const  name = req.name;
 
     // Regenerate JWT
