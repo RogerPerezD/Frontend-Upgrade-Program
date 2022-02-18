@@ -22,6 +22,8 @@ export type EventAction = {
     payload?: Event
 }
 
+export type DispatchEvent= (args: EventAction) => EventAction;
+
 const initialState: EventState = {
     events: [{
         id: new Date().getTime(),

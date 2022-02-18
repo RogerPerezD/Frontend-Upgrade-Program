@@ -3,7 +3,9 @@ export enum types{
     uiOpenModal = '[ui] Open modal',
     uiCloseModal = '[ui] Close modal',
 
+    
     eventSetActive = '[event] Set active',
+    eventStartAddNew = '[event] Start add new',
     eventAddNew = '[event] Add new',
     eventClearActiveEvent = '[event] Clear active event',
     eventUpdated = '[event] Event updated',

@@ -7,7 +7,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { closeModalAction } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventUpdated, eventStartAddNew } from '../../actions/events';
 import { Event } from '../../reducers/calendarReducer';
 
 const customStyles = {
@@ -26,7 +26,7 @@ Modal.setAppElement('#root');
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const future = now.clone().add(1,'hours');
 
-interface EventForm {
+export interface EventForm {
     title: string;
     notes: string;
     start: Date;
@@ -117,20 +117,9 @@ export const CalendarModal = () => {
 
         if (activeEvent) {
             const {user} =  activeEvent;
-            dispatch( eventUpdated({
-                user,
-                ...formValues
-            } as Event));
+            // dispatch( eventUpdated( formValues ));
         }else{
-            const newEvent = {
-                ...formValues,
-                id: new Date().getTime(),
-                user: {
-                    uid: '234',
-                    name: 'Mike'
-                }
-            };
-            dispatch( eventAddNew( newEvent ) );
+            dispatch( eventStartAddNew( formValues ) );
         }
         closeModal();
     }
