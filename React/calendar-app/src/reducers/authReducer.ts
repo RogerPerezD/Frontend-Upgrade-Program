@@ -1,6 +1,7 @@
+import { types } from '../types/types';
 
 export interface User{
-    id: string;
+    uid: string;
     name: string;
 }
 
@@ -15,12 +16,31 @@ type AuthAction = {
     payload?: User
 }
 
+export type DispatchAuth = (args: AuthAction) => AuthAction;
+
 const initialState: AuthState = {
     checking: true,
 }
 
-export const authReducer = ( state = initialState, action: AuthAction)=>{
+export const authReducer = ( state = initialState, action: AuthAction): AuthState =>{
     switch (action.type) {
+        case types.authLogin:
+            return {
+                ...state,
+                checking: false,
+                user: {...action.payload as User}
+            }
+        case types.authStartRegister:
+            return {
+                ...state,
+                checking: false,
+                user: {...action.payload as User}
+            }
+        case types.authCheckingFinish:
+            return {
+                ...state,
+                checking: true,
+            }
         default:
             return state;
     }

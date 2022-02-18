@@ -30,7 +30,7 @@ const initialState: EventState = {
         start: moment().toDate(),
         end: moment().add( 2, 'hours' ).toDate(),
         user: {
-            id: '123',
+            uid: '123',
             name: 'Roger'
         }
     }],

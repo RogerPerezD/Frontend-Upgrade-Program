@@ -126,7 +126,7 @@ export const CalendarModal = () => {
                 ...formValues,
                 id: new Date().getTime(),
                 user: {
-                    id: '234',
+                    uid: '234',
                     name: 'Mike'
                 }
             };
