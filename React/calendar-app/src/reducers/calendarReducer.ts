@@ -19,7 +19,7 @@ export type EventState = {
 
 export type EventAction = {
     type: string,
-    payload?: Event
+    payload?: Event | Event[]
 }
 
 export type DispatchEvent= (args: EventAction) => EventAction;
@@ -32,7 +32,7 @@ const initialState: EventState = {
         start: moment().toDate(),
         end: moment().add( 2, 'hours' ).toDate(),
         user: {
-            uid: '123',
+            _id: '123',
             name: 'Roger'
         }
     }],
@@ -69,6 +69,11 @@ export const calendarReducer = ( state = initialState, action: EventAction): Eve
                 events: state.events.filter((event) => (event.id !== state.activeEvent?.id) ),
                 activeEvent: null
             };
+        case types.eventLoaded:
+            return {
+                ...state,
+                events: [...action.payload as Event []]
+            }
     
         default:
             return state;

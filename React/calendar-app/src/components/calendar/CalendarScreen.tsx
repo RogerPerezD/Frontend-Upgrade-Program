@@ -5,11 +5,11 @@ import  { Calendar, momentLocalizer, SlotInfo, stringOrDate, View } from 'react-
 import { Navbar } from '../ui/Navbar';
 import { messages } from '../../helpers/calendar-messages';
 import { CalendarEvent } from './CalendarEvent';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CalendarModal } from './CalendarModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModalAction } from '../../actions/ui';
-import { eventSetActive, eventClearActiveEvent } from '../../actions/events';
+import { eventSetActive, eventClearActiveEvent, eventStartLoading } from '../../actions/events';
 import {  Event } from '../../reducers/calendarReducer';
 import { AddNewFab } from '../ui/AddNewFab';
 import { RootState } from '../../store/store';
@@ -32,14 +32,20 @@ const localizer = momentLocalizer(moment); // or globalizeLocalizer
 export const CalendarScreen = () => {
 
   const dispatch = useDispatch();
+  const {user} = useSelector( (state: RootState) => state.auth)
   const { events, activeEvent } = useSelector((state: RootState)=> state.calendar);
 
   const [lastView, setLastView] = useState<string>(localStorage.getItem('lastView') || 'month')
 
+
+  useEffect(() => {
+    dispatch( eventStartLoading() );
+  }, [dispatch])
+  
+
   const eventStyleGetter = ( event: Event, start: stringOrDate, end: stringOrDate, isSelected: boolean) =>{
-    // console.log(event, start,end,isSelected);
     const style: React.CSSProperties = {
-      backgroundColor: '#367CF7',
+      backgroundColor: (user?._id === event.user._id) ? '#367CF7' : '#465660',
       borderRadius: '0px',
       opacity: 0.8,
       display: 'block',

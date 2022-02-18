@@ -1,9 +1,9 @@
-// import { CustomEvent } from '../components/calendar/CalendarScreen';
 import { Event, DispatchEvent } from '../reducers/calendarReducer';
 import { types } from '../types/types';
 import { EventForm } from '../components/calendar/CalendarModal';
 import { fetchWithToken } from '../helpers/fetch';
 import { RootState } from '../store/store';
+import { prepareEvents } from '../helpers/prepareEvents';
 
 
 
@@ -55,5 +55,29 @@ export const eventUpdated = ( event: Event ) =>{
 export const eventDeleted = () =>{
     return {
         type: types.eventDeleted
+    }
+}
+
+export const eventStartLoading = ()=>{
+    return async (dispatch: DispatchEvent)=>{
+        try {
+            const resp = await fetchWithToken('events');
+            const body = await resp.json();
+            const events = prepareEvents(body.events);
+            // console.log(events)
+            // console.log(body);
+            dispatch(eventLoaded(events))
+        } catch (error) {
+            console.log(error);
+        }
+        
+
+    }
+}
+
+const eventLoaded = (events: Event[])=>{
+    return {
+        type: types.eventLoaded,
+        payload: events
     }
 }

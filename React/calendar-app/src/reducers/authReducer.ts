@@ -1,7 +1,7 @@
 import { types } from '../types/types';
 
 export interface User{
-    uid: string;
+    _id: string;
     name: string;
 }
 

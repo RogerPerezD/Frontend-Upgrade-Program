@@ -10,6 +10,7 @@ export enum types{
     eventClearActiveEvent = '[event] Clear active event',
     eventUpdated = '[event] Event updated',
     eventDeleted = '[event] Event deleted',
+    eventLoaded = '[event] Events loaded',
 
     authChecking = '[auth] Checking login state',
     authCheckingFinish = '[auth] Finish checking login state',

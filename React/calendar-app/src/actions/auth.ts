@@ -16,7 +16,7 @@ export const startLogin = ( email: string, password: string) =>{
         
             dispatch( 
                 login({
-                uid: body.uid,
+                _id: body.uid,
                 name: body.name
                 }) 
             );
@@ -47,7 +47,7 @@ export const startRegister = ( email: string, password: string, name: string) =>
         
             dispatch( 
                 register({
-                uid: body.uid,
+                _id: body.uid,
                 name: body.name
                 }) 
             );
@@ -79,7 +79,7 @@ export const startChecking = ()=>{
         
             dispatch( 
                 login({
-                uid: body.uid,
+                _id: body.uid,
                 name: body.name
                 }) 
             );

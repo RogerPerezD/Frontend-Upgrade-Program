@@ -32,14 +32,14 @@ export const AppRouter = () => {
             <Route 
                 path="/" 
                 element={
-                <PrivateRoutes isAuth = { !!user?.uid}>
+                <PrivateRoutes isAuth = { !!user?._id}>
                     <CalendarScreen/>
                 </PrivateRoutes>
             }/>
             <Route 
                 path="/login" 
                 element={
-                <PublicRoutes isAuth = { !!user?.uid}>
+                <PublicRoutes isAuth = { !!user?._id}>
                     <LoginScreen/>
                 </PublicRoutes>
             }/>
