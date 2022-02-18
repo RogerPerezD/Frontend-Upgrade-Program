@@ -95,3 +95,18 @@ const checkingFinish = ()=>{
         type: types.authCheckingFinish
     }
 }
+
+export const startLogout = ()=>{
+    return (dispatch: DispatchAuth) =>{
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('token-init-date');
+        localStorage.clear();
+        dispatch( logout() );
+    }
+}
+
+const logout = ()=>{
+    return {
+        type: types.authLogout
+    }
+}
