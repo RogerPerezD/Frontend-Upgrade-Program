@@ -3,7 +3,7 @@ import { types } from '../types/types';
 import { EventForm } from '../components/calendar/CalendarModal';
 import { fetchWithToken } from '../helpers/fetch';
 import { RootState } from '../store/store';
-import { prepareEvents, prepareEvent } from '../helpers/prepareEvents';
+import { prepareEvents } from '../helpers/prepareEvents';
 import Swal from 'sweetalert2';
 
 
@@ -53,9 +53,6 @@ export const eventStartUpdate = (event: EventForm) =>{
         try {
             const resp = await fetchWithToken(`events/${ eventId }`,'PUT', event)
             const body = await resp.json();
-            // const eventEdit = prepareEvent(body.event);
-            
-
             if (body.ok) {
                 const editEvent = {
                     ...event,
@@ -80,7 +77,25 @@ const eventUpdated = ( event: Event ) =>{
     }
 }
 
-export const eventDeleted = () =>{
+export const eventStartDelete = ()=>{
+    return async ( dispatch: DispatchEvent,getState: ()=> RootState )=>{
+        const { calendar } = getState();  
+        const eventId = calendar.activeEvent?.id;
+        try {
+            const resp = await fetchWithToken(`events/${ eventId }`,'DELETE')
+            const body = await resp.json();
+            if (body.ok) {
+                dispatch( eventDeleted() );
+            }else{
+                Swal.fire('Error', body.msg, 'error');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+const eventDeleted = () =>{
     return {
         type: types.eventDeleted
     }
@@ -107,5 +122,12 @@ const eventLoaded = (events: Event[])=>{
     return {
         type: types.eventLoaded,
         payload: events
+    }
+}
+
+// Clear events when user's logout
+export const eventClearLogout = () =>{
+    return {
+        type: types.eventClearLogout
     }
 }

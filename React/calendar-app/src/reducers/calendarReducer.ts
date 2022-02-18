@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { types } from '../types/types';
 import { User } from './authReducer';
 
@@ -64,6 +63,8 @@ export const calendarReducer = ( state = initialState, action: EventAction): Eve
                 ...state,
                 events: [...action.payload as Event []]
             }
+        case types.eventClearLogout:
+            return initialState;
     
         default:
             return state;

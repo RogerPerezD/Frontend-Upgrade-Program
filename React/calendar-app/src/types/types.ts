@@ -11,6 +11,7 @@ export enum types{
     eventUpdated = '[event] Event updated',
     eventDeleted = '[event] Event deleted',
     eventLoaded = '[event] Events loaded',
+    eventClearLogout = '[event] Clear Logout events',
 
     authChecking = '[auth] Checking login state',
     authCheckingFinish = '[auth] Finish checking login state',

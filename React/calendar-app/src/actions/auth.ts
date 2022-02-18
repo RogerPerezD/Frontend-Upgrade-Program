@@ -2,6 +2,7 @@ import { fetchWithoutToken, fetchWithToken } from "../helpers/fetch"
 import { User, DispatchAuth } from '../reducers/authReducer';
 import { types } from '../types/types';
 import Swal from 'sweetalert2';
+import { eventClearLogout } from './events';
 
 export const startLogin = ( email: string, password: string) =>{
     return async ( dispatch: DispatchAuth)=>{
@@ -102,6 +103,7 @@ export const startLogout = ()=>{
         // localStorage.removeItem('token-init-date');
         localStorage.clear();
         dispatch( logout() );
+        dispatch( eventClearLogout() );
     }
 }
 
@@ -109,4 +111,4 @@ const logout = ()=>{
     return {
         type: types.authLogout
     }
-}
+} 
