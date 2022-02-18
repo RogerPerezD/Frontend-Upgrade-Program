@@ -7,7 +7,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { closeModalAction } from '../../actions/ui';
-import { eventClearActiveEvent, eventUpdated, eventStartAddNew } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/events';
 import { Event } from '../../reducers/calendarReducer';
 
 const customStyles = {
@@ -117,7 +117,7 @@ export const CalendarModal = () => {
 
         if (activeEvent) {
             const {user} =  activeEvent;
-            // dispatch( eventUpdated( formValues ));
+            dispatch( eventStartUpdate( formValues ));
         }else{
             dispatch( eventStartAddNew( formValues ) );
         }

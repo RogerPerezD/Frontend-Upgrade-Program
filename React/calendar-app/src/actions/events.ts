@@ -3,7 +3,8 @@ import { types } from '../types/types';
 import { EventForm } from '../components/calendar/CalendarModal';
 import { fetchWithToken } from '../helpers/fetch';
 import { RootState } from '../store/store';
-import { prepareEvents } from '../helpers/prepareEvents';
+import { prepareEvents, prepareEvent } from '../helpers/prepareEvents';
+import Swal from 'sweetalert2';
 
 
 
@@ -45,7 +46,34 @@ export const eventClearActiveEvent = ( ) =>{
     }
 }
 
-export const eventUpdated = ( event: Event ) =>{
+export const eventStartUpdate = (event: EventForm) =>{
+    return async ( dispatch: DispatchEvent,  getState: ()=> RootState) =>{
+        const { calendar, auth } = getState();
+        const eventId = calendar.activeEvent?.id;
+        try {
+            const resp = await fetchWithToken(`events/${ eventId }`,'PUT', event)
+            const body = await resp.json();
+            // const eventEdit = prepareEvent(body.event);
+            
+
+            if (body.ok) {
+                const editEvent = {
+                    ...event,
+                    id: body.event.id,
+                    user: auth.user
+                };
+                dispatch( eventUpdated(editEvent as Event) );
+            }else{
+                Swal.fire('Error', body.msg, 'error');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
+}
+
+const eventUpdated = ( event: Event ) =>{
     return {
         type: types.eventUpdated,
         payload: event

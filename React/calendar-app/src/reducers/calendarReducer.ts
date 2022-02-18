@@ -4,7 +4,7 @@ import { User } from './authReducer';
 
 
 export interface Event {
-    id: number;
+    id: string;
     title: string;
     notes: string;
     start: Date;
@@ -25,17 +25,7 @@ export type EventAction = {
 export type DispatchEvent= (args: EventAction) => EventAction;
 
 const initialState: EventState = {
-    events: [{
-        id: new Date().getTime(),
-        title: 'Meeting important',
-        notes: 'Description note',
-        start: moment().toDate(),
-        end: moment().add( 2, 'hours' ).toDate(),
-        user: {
-            _id: '123',
-            name: 'Roger'
-        }
-    }],
+    events: [],
     activeEvent: null
 }
 

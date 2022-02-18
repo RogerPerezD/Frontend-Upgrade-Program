@@ -12,3 +12,14 @@ export const prepareEvents = ( events: Event []) =>{
         }
     })
 }
+
+
+export const prepareEvent = ( event: Event) =>{
+    // console.log(events);
+
+    return {
+            ...event,
+            end: moment( event.end ).toDate(),
+            start: moment( event.start ).toDate(),
+    }
+}
