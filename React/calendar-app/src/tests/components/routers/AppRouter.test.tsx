@@ -9,28 +9,6 @@ import { EventState } from '../../../reducers/calendarReducer';
 
 const middlewares = [ thunk ];
 const mockStore = configureStore<RootState>(middlewares);
-// const initialStateUser = {
-//     checking: false,
-//     user: {
-//         name: 'Roger',
-//         _id: '123'
-//     }
-// }
-// const initialStateEvents: EventState = {
-//     events: [],
-//     activeEvent: null
-// }
-// const initState = {
-//     auth: initialStateUser,
-//     calendar: initialStateEvents,
-//     ui: {
-//         modalOpen: false
-//     }
-// } as RootState;
-// let store = mockStore(initState);
-// store.dispatch = jest.fn();
-
-
 
 describe('test in AppRouter', () => { 
 

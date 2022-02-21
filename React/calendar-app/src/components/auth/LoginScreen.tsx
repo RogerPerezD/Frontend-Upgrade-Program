@@ -40,6 +40,7 @@ export const LoginScreen = () => {
 
     const handleLogin = ( e: FormEvent)=>{
         e.preventDefault();
+        console.log(lEmail, lPassword,'valores login');
         dispatch( startLogin(lEmail, lPassword) );
     }
 
