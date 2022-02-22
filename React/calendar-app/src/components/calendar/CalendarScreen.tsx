@@ -58,7 +58,7 @@ export const CalendarScreen = () => {
 
   const onDoubleClick = (e: Event) => {
     // console.log(e);
-    dispatch( openModalAction() );
+    dispatch( openModalAction() ); 
   }
 
   const onSelectEvent = (e: Event) => {

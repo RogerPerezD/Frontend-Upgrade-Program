@@ -5,13 +5,19 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { LoginScreen } from '../../../components/auth/LoginScreen';
-import { startLogin } from '../../../actions/auth';
+import { startLogin, startRegister } from '../../../actions/auth';
 import { FormEvent } from 'react';
 import { act } from 'react-dom/test-utils';
+import Swal from 'sweetalert2';
 
 jest.mock('../../../actions/auth', ()=>({
-    startLogin: jest.fn()
-}))
+    startLogin: jest.fn(),
+    startRegister: jest.fn()
+}));
+
+jest.mock('sweetalert2', ()=>({
+    fire: jest.fn()
+}));
 
 const middlewares = [ thunk ];
 const mockStore = configureStore<RootState>(middlewares);
@@ -28,6 +34,10 @@ const wrapper = mount(
     );
 
 describe('test in <LoginScreen/>', () => { 
+    beforeEach(()=>{
+        jest.clearAllMocks();
+    })
+
     test('should display the component successfully', () => { 
         // expect(wrapper).toMatchSnapshot();
     });
@@ -35,57 +45,37 @@ describe('test in <LoginScreen/>', () => {
     test('should call the dispatch login', () => { 
         const email = 'test@mail.com';
         const password = 'test123';
-        wrapper.find('input[name="lEmail"]').simulate('change', {
-            currentTarget: {
-                value: email,
-                name: 'lEmail'
-            }
-        }as FormEvent<HTMLInputElement>);
 
-        wrapper.find('input[name="lPassword"]').simulate('change', {
-            currentTarget: {
-                value: password
-            }
-        });
-        
-        // console.log( wrapper.find('input[name="lEmail"]').html() );
-        // const emailChange = wrapper.find('input[name="lEmail"]').prop('onChange');
-        // const passwordChange = wrapper.find('input[name="lPassword"]').prop('onChange');
-        // if (emailChange && passwordChange) {
-        //     act(()=>{
-        //         emailChange({
-        //             currentTarget: {
-        //                 value: email,
-        //                 name: 'lEmail'
-        //             }
-        //         }as FormEvent<HTMLInputElement>);
-        //     })
-           
-        //     wrapper.update();
-        //     console.log( wrapper.find('input[name="lEmail"]').html() );
-        //     act(() =>{
-        //         passwordChange({
-        //             currentTarget: {
-        //                 value: password,
-        //                 name: 'lPassword'
-        //             }
-        //         }as FormEvent<HTMLInputElement>);
-        //     });
-        
-        // }
-        // console.log( wrapper.find('input[name="lEmail"]').html() );
-        // console.log( wrapper.find('input[name="lPassword"]').html() );
+        wrapper.find('input[name="lEmail"]').getDOMNode<HTMLInputElement>().value = email;
+        wrapper.find('input[name="lEmail"]').simulate('change');
 
+        wrapper.find('input[name="lPassword"]').getDOMNode<HTMLInputElement>().value = password;
+        wrapper.find('input[name="lPassword"]').simulate('change');
 
-        
         const form = wrapper.find('form').get(0);
         form.props.onSubmit({
             preventDefault(){}
         });
-        // console.log(form.props.onSubmit);
 
         expect( store.dispatch ).toHaveBeenCalled();
-        // expect( startLogin ).toHaveBeenCalledWith( email, password);
+        expect( startLogin ).toHaveBeenCalledWith(email, password);
 
-    })
+    });
+
+    test('there is no register if the passwords doestn match', () => { 
+        const passwordChange = wrapper.find('input[name="rPassword"]').prop('onChange')!;
+            act(()=>{
+                passwordChange({
+                    currentTarget: {
+                        value: '123',
+                        name: 'rPassword'
+                    }
+                }as FormEvent<HTMLInputElement>)
+            });
+
+        wrapper.find('form').at(1).simulate('submit');
+        expect(store.dispatch).toBeCalledTimes(0);
+        expect(startRegister).not.toHaveBeenCalled();
+        expect(Swal.fire).toHaveBeenCalledWith('Error', 'Passwords must match','error');
+    });
 })

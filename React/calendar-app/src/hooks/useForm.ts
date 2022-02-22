@@ -5,7 +5,6 @@ export const useForm = <T>( initialState: T ): [ T, (e: FormEvent<HTMLInputEleme
     const [values, setValues] = useState<T>(initialState);
 
     const handleInput = ( { currentTarget }: FormEvent<HTMLInputElement> ): void =>{
-        console.log('entre al handleinput', currentTarget.value)
         setValues({
             ...values,
             [ currentTarget.name ]: currentTarget.value
