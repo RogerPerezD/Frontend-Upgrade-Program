@@ -547,10 +547,10 @@ exports[`test in AppRouter should display private route (CalendarScreen) 1`] = `
           className="rbc-row-bg"
         >
           <div
-            className="rbc-day-bg rbc-today"
+            className="rbc-day-bg"
           />
           <div
-            className="rbc-day-bg"
+            className="rbc-day-bg rbc-today"
           />
           <div
             className="rbc-day-bg"
@@ -576,7 +576,7 @@ exports[`test in AppRouter should display private route (CalendarScreen) 1`] = `
             className="rbc-row "
           >
             <div
-              className="rbc-date-cell rbc-now rbc-current"
+              className="rbc-date-cell"
               role="cell"
             >
               <a
@@ -588,7 +588,7 @@ exports[`test in AppRouter should display private route (CalendarScreen) 1`] = `
               </a>
             </div>
             <div
-              className="rbc-date-cell"
+              className="rbc-date-cell rbc-now rbc-current"
               role="cell"
             >
               <a

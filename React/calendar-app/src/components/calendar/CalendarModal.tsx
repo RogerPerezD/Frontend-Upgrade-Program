@@ -71,7 +71,7 @@ export const CalendarModal = () => {
     }
 
     const closeModal = ()=>{
-        console.log('clossing...');
+        // console.log('clossing...');
         setFormValues( initialState );
         dispatch( eventClearActiveEvent() );
         dispatch( closeModalAction() );
@@ -97,11 +97,9 @@ export const CalendarModal = () => {
 
     const handleSubmitForm =(e: FormEvent) =>{
         e.preventDefault();
-        // console.log(formValues);
         const momentStart = moment( start );
         const momentEnd = moment( end );
-        // console.log(momentStart, momentEnd);
-
+        console.log(formValues);
         if (momentStart.isSameOrAfter( momentEnd, 'hour' )) {
             return Swal.fire(
                 'Error',
@@ -124,7 +122,7 @@ export const CalendarModal = () => {
         closeModal();
     }
 
-
+    const aria = process.env.NODE_ENV === 'test' ? false : true;
 
 
     return (
@@ -136,6 +134,7 @@ export const CalendarModal = () => {
             closeTimeoutMS={ 200 }
             className="modal"
             overlayClassName="modal-fondo"
+            ariaHideApp= { aria }
         >
             <h1> {(activeEvent) ? 'Edit Event' : 'Add New Event'} </h1>
             <hr />
