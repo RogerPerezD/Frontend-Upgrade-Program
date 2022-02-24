@@ -1,9 +1,9 @@
-import { interval, Observer, timer } from 'rxjs';
+import { from, Observer } from 'rxjs';
 
-
-const observer: Observer<number> = {
-    next: ( value ) =>{ 
-        console.log('Observer got a value: ', value);
+const observer: Observer<Response> = {
+    next: async ( resp ) =>{ 
+        const data = await resp.json();
+        console.log(data);
     },
     error: ( error )=>{
         console.error('Observer got a error: ', error);
@@ -13,9 +13,7 @@ const observer: Observer<number> = {
     }
 }
 
-const todayIn5Seconds = new Date();
-todayIn5Seconds.setSeconds( todayIn5Seconds.getSeconds() + 5);
-// const observable$ = interval(1000);
-const timer$ = timer(todayIn5Seconds);
+const obs1$ = from(fetch('https://api.github.com/users/klerith'));
 
-timer$.subscribe( observer );
+obs1$.subscribe( observer );
+
