@@ -1,8 +1,9 @@
-import { fromEvent, Observer } from 'rxjs';
+import { interval, Observer, timer } from 'rxjs';
 
-const observer: Observer<PointerEvent> = {
+
+const observer: Observer<number> = {
     next: ( value ) =>{ 
-        console.log('Observer got a value: ', value.x);
+        console.log('Observer got a value: ', value);
     },
     error: ( error )=>{
         console.error('Observer got a error: ', error);
@@ -12,15 +13,9 @@ const observer: Observer<PointerEvent> = {
     }
 }
 
-// const btn = document.querySelector('#btn') as HTMLButtonElement;
-// const observable$ = fromEvent( btn, 'click' );
-// observable$.subscribe( observer );
+const todayIn5Seconds = new Date();
+todayIn5Seconds.setSeconds( todayIn5Seconds.getSeconds() + 5);
+// const observable$ = interval(1000);
+const timer$ = timer(todayIn5Seconds);
 
-const src1$ = fromEvent<PointerEvent>( document, 'click' );
-const src2$ = fromEvent<KeyboardEvent>( document,  'keyup' );
-
-
-src1$.subscribe( observer );
-src2$.subscribe( (event) => {
-    console.log(event.key )
-});
+timer$.subscribe( observer );
