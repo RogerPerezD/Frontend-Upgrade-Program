@@ -1,4 +1,4 @@
-import { map, range, Observer, fromEvent, pluck, mapTo } from 'rxjs';
+import { map, range, Observer, fromEvent, pluck } from 'rxjs';
 
 const observer: Observer<any> = {
     next: ( code ) =>{ 
@@ -18,14 +18,8 @@ const keyCodeWithPluck$ = keyup$.pipe(
     pluck('target','baseURI')
 );
 
-// keyCodeWithPluck$.subscribe( observer );
+keyCodeWithPluck$.subscribe( observer );
 
 const keyCodeWithMap$ = keyup$.pipe(
     map<KeyboardEvent, string>(( event )=> event.code)
 );
-
-
-range(1,5).pipe(
-    mapTo('a')
-).subscribe( observer );
-
